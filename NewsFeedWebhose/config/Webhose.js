@@ -6,7 +6,7 @@ const client = webhoseio.config({
 
 const default_query_params = {
     'q': ' "News" language:greek site_type:news -site:kerkida.net',
-    // kerkida.net Xalia arthra kai apeikonisi ara blacklist
+    // kerkida.net Xalia arthra kai apeikonisi --> blacklist
     'sort': 'crawled'
 };
 
