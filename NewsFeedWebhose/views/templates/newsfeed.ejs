@@ -1,0 +1,19 @@
+<% output['posts'].forEach(function(item) { %>
+<% console.log("TITLE FULL" + item.thread.title_full) %>
+<% console.log("TITLE" + item.thread.title) %>
+<div class="col-md-10 blogShort">
+    <% if (item.thread.title_full) { %>
+    <h1><%- item.thread.title_full %></h1>
+    <% } else { %>
+    <h1><%- item.thread.title %></h1>
+    <% } %>
+
+    <img src="<%- item.thread.main_image %>" alt="post img"
+         class="pull-left img-responsive thumb margin10 img-thumbnail">
+
+    <em>Original Source: <a href="<%- item.thread.site_full %>"
+                            target="_blank"><%- item.thread.site_full %></a></em>
+    <article><p><%- item.text %></p></article>
+    <a class="btn btn-blog pull-right marginBottom10" href="<%- item.thread.url %>">Περισσότερα ...</a>
+</div>
+<% }); %>
