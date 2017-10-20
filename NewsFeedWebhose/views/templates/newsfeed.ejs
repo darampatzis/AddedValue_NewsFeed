@@ -1,21 +1,37 @@
 <% output['posts'].forEach(function(item) { %>
 <div class="col-md-10 blogShort">
     <% if (item.thread.title_full) { %>
-    <h1><%- item.thread.title_full %></h1>
+    <h1><%= item.thread.title_full %></h1>
     <% } else { %>
-    <h1><%- item.thread.title %></h1>
+    <h1><%= item.thread.title %></h1>
     <% } %>
 
     <% if (item.thread.main_image) { %>
-    <img src="<%- item.thread.main_image %>" alt="post img"
-         class="pull-left img-responsive thumb my-img img-thumbnail">
+    <div class="center-cropped">
+        <img src="<%- item.thread.main_image %>" alt="post img"
+             class="pull-left img-responsive thumb my-img img-thumbnail">
+    </div>
     <% } %>
 
-    <em><a href="http://<%- item.thread.site_full %>"
-           target="_blank"><%- item.thread.site_full %></a>
-        <%- new Date(Date.parse(item.thread.published)).toLocaleString() %></em>
-    <article><p><%- item.text %></p></article>
-    <a class="btn btn-blog pull-right marginBottom10" href="<%- item.thread.url %>"
+    <article class="article-body">
+        <p><%= item.text %></p>
+    </article>
+    <em>
+        <a href="http://<%= item.thread.site_full %>" target="_blank">
+            <%= item.thread.site_full %>
+        </a>
+    </em>
+    <em class="pull-right">
+        <%= moment(item.thread.published).format('LLLL') %>
+    </em>
+
+    <!--
+    <em><a href="http://<%#= item.thread.site_full %>"
+           target="_blank"><%#= item.thread.site_full %></a>
+        <%#= new Date(Date.parse(item.thread.published)).toLocaleString() %></em>
+    <article><p><%#= item.text %></p></article>
+    <a class="btn btn-blog pull-right marginBottom10" href="<%#= item.thread.url %>"
        target="_blank">Περισσότερα ...</a>
+       -->
 </div>
 <% }); %>

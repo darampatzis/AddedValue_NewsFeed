@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
 
 router.get('/q=:query', (req, res, next) => {
     const query = req.params.query;
-    console.log('GET /q=:query - FORTONETAI I SELIDA ME PARAMETROUS');
+    console.log('GET /q=' + query + ' - FORTONETAI I SELIDA ME PARAMETROUS');
     if (!query) {
         console.log('ERROR RETURN');
         next();
@@ -29,7 +29,7 @@ router.get('/q=:query', (req, res, next) => {
             ' site_type:"' + req.body.site_type + '" thread.country:' + os_locale + '',
             'sort': req.body.sort
             */
-            'q': ' "Donald Trump" language:english site_type:"news" thread.country:US',
+            'q': ' "' + query + '" language:english site_type:"news" thread.country:US -site:kerkida.net',
             'sort': "crawled"
         };
         webhoseio.client.query('filterWebContent', urlParams).then(output => {
