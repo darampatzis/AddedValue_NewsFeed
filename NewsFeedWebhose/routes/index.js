@@ -9,7 +9,7 @@ osLocale().then(locale => {
 });
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', function (req, res) {
     webhoseio.client.query('filterWebContent', webhoseio.defaultParams).then(output => {
         console.log('GET / - DILADI OTAN FORTONETAI I SELIDA XWRIS PARAMETROUS');
         res.status(200).render('index', {title: 'Express', output: output});
@@ -17,12 +17,12 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/q=:query', (req, res, next) => {
-    var query = req.params.query;
+    const query = req.params.query;
+    console.log('GET /q=:query - FORTONETAI I SELIDA ME PARAMETROUS');
     if (!query) {
         console.log('ERROR RETURN');
         next();
     } else {
-        console.log('GET /q=:query - FORTONETAI I SELIDA ME PARAMETROUS');
         let urlParams = {
             /*
             'q': ' "' + req.body.q + '" language:' + req.body.language +
