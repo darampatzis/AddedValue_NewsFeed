@@ -4,10 +4,11 @@ const client = webhoseio.config({
     token: 'f79c825d-f09a-491c-ad7b-2df462930f0d'
 });
 
-const default_query_params = {
-    'q': ' "News" language:greek site_type:news -site:kerkida.net',
-    // kerkida.net Xalia arthra kai apeikonisi --> blacklist
-    'sort': 'crawled'
+const makeQuery = function (keyowrd, type) {
+    return {
+        'q': ' "'+keyowrd+'" language:greek site_type:'+type+'',
+        'sort': 'crawled'
+    };
 };
 
 const params = (req) => {
@@ -27,5 +28,5 @@ const params = (req) => {
 };
 
 module.exports.client = client;
-module.exports.defaultParams = default_query_params;
+module.exports.makeQuery = makeQuery;
 module.exports.urlParams = params;
