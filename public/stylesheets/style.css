@@ -4,7 +4,6 @@ body {
     padding-top: 5em;
     padding-right: 50px;
     text-align: justify;
-    /*width: 30em;*/
 }
 
 body a:hover {
@@ -15,15 +14,14 @@ body a:hover {
     border-bottom: 1px solid #ddd;
 }
 
-.add {
-    background: #333;
-    padding: 10%;
-    height: 300px;
+.blogShort em {
+    position: static;
+    bottom: 0;
 }
 
 .nav-sidebar {
-    width: 100%;
-    padding: 8px 0;
+    max-width: 100%;
+    padding: 8px 10px;
     border-right: 1px solid #ddd;
 }
 
@@ -117,4 +115,17 @@ article {
 
 article p {
     margin-bottom: .5em;
+}
+
+@media (min-width: 992px) {
+    .affix {
+        float: left;
+        position: fixed;
+    }
+}
+
+@media (max-width: 992px) {
+    .affix {
+        display: none;
+    }
 }

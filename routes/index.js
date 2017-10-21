@@ -12,26 +12,31 @@ osLocale().then(locale => {
 router.get('/', function (req, res) {
     //if its not logged in show random stuff
     //else show its selection
-    webhoseio.client.query('filterWebContent', webhoseio.makeQuery('','news')).then(output => {
-        console.log('GET / - fortosi selidas XWRIS paramertous');
-        res.status(200).render('index', {title: 'Express', output: output});
-    });
+    if (Object.keys(req.query).length != 0) {
+        // Ean sto index yparxei parametros kanei redirect sto /search route
+        res.status(200).redirect('/search?q=' + req.query.q);
+    } else {
+        webhoseio.client.query('filterWebContent', webhoseio.makeQuery('', 'news')).then(output => {
+            console.log('GET / - fortosi selidas XWRIS paramertous');
+            res.status(200).render('index', {title: 'Express', output: output});
+        });
+    }
 });
 
 router.get('/search', (req, res, next) => {
-    const query = req.query.q;
+    const query = req.sanitize(req.query.q);
+    // Ginete sanitize to input tou xristi
     console.log('GET /q=' + query + ' - fortosi selidas ME paramertous');
     if (!query) {
         console.log('ERROR RETURN');
         next();
     } else {
-
-        webhoseio.client.query('filterWebContent', webhoseio.makeQuery(query,'news')).then(output => {
+        webhoseio.client.query('filterWebContent', webhoseio.makeQuery(query, 'news')).then(output => {
             res.status(200).render('index', {output: output});
         })
     }
 }, (req, res) => {
-    res.status(404).send('ERROR!');
+    res.status(404).send('Not Found!');
 });
 
 module.exports = router;
