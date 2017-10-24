@@ -18,7 +18,11 @@
                     <li><a href="javascript:">Recipes</a></li>
                     <li><a href="javascript:">Challenge</a></li>
                     <li class="nav-divider"></li>
-                    <li><a href="javascript:"><i class="glyphicon glyphicon-off"></i> Sign in</a></li>
+                    <% if(login){ %>
+                        <li>Hello <%=user.displayName%></li>
+                    <%} else {%>
+                        <li><a href="/login/facebook"><i class="glyphicon glyphicon-off"></i> Sign in</a></li>
+                    <%}%>
                 </ul>
             </nav>
         </div>

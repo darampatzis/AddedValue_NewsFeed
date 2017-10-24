@@ -18,7 +18,8 @@ router.get('/', function (req, res) {
     } else {
         webhoseio.client.query('filterWebContent', webhoseio.makeQuery('', 'news')).then(output => {
             console.log('GET / - fortosi selidas XWRIS paramertous');
-            res.status(200).render('index', {title: 'Express', output: output});
+            console.log('passport user = ='+ JSON.stringify(req.user))
+            res.status(200).render('index', {title: 'Express', output: output, login:req.session.auth , user:req.session.user });
         });
     }
 });
