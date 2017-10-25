@@ -7,7 +7,7 @@ var passport = require('passport')
 passport.use(new FacebookStrategy({
         clientID: '1919765821621998',
         clientSecret: 'e581b9dffa5feb3a1ae9ffbfdb4f2b3b',
-        callbackURL: "http://localhost:3000/login/facebook/callback"
+        callbackURL: "http://zeus-zg.ddn.net/login/facebook/callback"
     },
     function(accessToken, refreshToken, profile, done) {
         console.log('accessToken = ' + accessToken )
