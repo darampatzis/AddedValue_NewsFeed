@@ -6,34 +6,37 @@
 </em>
 <% output['posts'].forEach(function(item, index) { %>
 <!-- Me tin parametro "index" metraw ta arthra (gia debugging) -->
-<div class="col-md-10 blogShort pull-right">
+<!--div class="col-md-10 blogShort">
     <!-- Ola ta arthra emfanizontai pleon to ena katw apo to allo -->
-    <a class="hover_style" href="<%- item.thread.url %>" target="_blank">
-        <% if (item.thread.title_full) { %>
-        <h1><%= item.thread.title_full %></h1>
-        <% } else { %>
-        <h1><%= item.thread.title %></h1>
-        <% } %>
-        <div class="center-cropped">
-            <img src="<%- item.thread.main_image %>" alt="post img"
-                 class="pull-left img-responsive thumb my-img img-thumbnail"
-                 onError="this.onerror=null;this.src='https://users.it.teithe.gr/~it144252/photo-not-available.png';">
-            <!-- onError diladi ean den vrethei eikona fortonetai eikona apo users.it -->
-        </div>
-    </a>
-    <article class="article-body">
-        <p class="read-more"><%= item.text %></p>
-    </article>
-    <em class="pull-left">
-        Article no <%= ++index %>
-        <a href="http://<%= item.thread.site_full %>" target="_blank">
-            <%= item.thread.site_full %>
+<div class="container">
+    <div class="col-md-6 col-md-offset-6 blogShort">
+        <a class="hover_style" href="<%- item.thread.url %>" target="_blank">
+            <% if (item.thread.title_full) { %>
+            <h1><%= item.thread.title_full %></h1>
+            <% } else { %>
+            <h1><%= item.thread.title %></h1>
+            <% } %>
+            <div class="center-cropped">
+                <img src="<%- item.thread.main_image %>" alt="post img"
+                     class="img-responsive img-thumbnail"
+                     onError="this.onerror=null;this.src='https://users.it.teithe.gr/~it144252/photo-not-available.png';">
+                <!-- onError diladi ean den vrethei eikona fortonetai eikona apo users.it -->
+            </div>
         </a>
-    </em>
-    <em class="pull-right">
-        <%= moment(item.thread.published).format('LLLL') %>
-        <!-- px Τρίτη, 17 Οκτωβρίου 2017 9:54 ΜΜ -->
-    </em>
+        <article class="article-body">
+            <p class="read-more"><%= item.text %></p>
+        </article>
+        <em class="pull-left">
+            Article no <%= ++index %>
+            <a href="http://<%= item.thread.site_full %>" target="_blank">
+                <%= item.thread.site_full %>
+            </a>
+        </em>
+        <em class="pull-right">
+            <%= moment(item.thread.published).format('LLLL') %>
+            <!-- px Τρίτη, 17 Οκτωβρίου 2017 9:54 ΜΜ -->
+        </em>
+    </div>
 </div>
 <% }); %>
 <script type="text/javascript">
