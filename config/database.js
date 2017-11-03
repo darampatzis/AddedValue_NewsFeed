@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = Promise; // fixes deprecation warning. Don't know why
 const config = require('./config');
 
 mongoose.connect(config.database.url, {useMongoClient: true});

@@ -4,11 +4,12 @@
     - Εμφανίζονται τα <%= output['totalResults'] - output['moreResultsAvailable'] %> απο αυτά
     - <%= output['requestsLeft'] %> requests left (Debugging)
 </em>
+<% if (output['posts']) { %>
 <% output['posts'].forEach(function(item, index) { %>
 <!-- Me tin parametro "index" metraw ta arthra (gia debugging) -->
 <!--div class="col-md-10 blogShort">
     <!-- Ola ta arthra emfanizontai pleon to ena katw apo to allo -->
-<div class="container">
+<div class="container load-more">
     <div class="col-md-6 col-md-offset-6 blogShort">
         <a class="hover_style" href="<%- item.thread.url %>" target="_blank">
             <% if (item.thread.title_full) { %>
@@ -39,6 +40,9 @@
     </div>
 </div>
 <% }); %>
+<% } else { %>
+<h1>ERROR</h1>
+<% } %>
 <script type="text/javascript">
     $(document).ready(function () {
 

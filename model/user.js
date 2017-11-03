@@ -14,9 +14,22 @@ const userSchema = new Schema({
         email: {
             type: String,
             unique: true
+        }
+    },
+    name: String
+    /* NEW
+     * , apps: {
+     *     id: {
+     *         type: String,
+     *         unique: true
+     *     },
+     *     token: {
+               type: String,
+               unique: true
         },
-        name: String
-    }
+     *     ....
+     * }
+     */
 });
 
 const model = mongoose.model('User', userSchema);

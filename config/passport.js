@@ -22,7 +22,7 @@ module.exports = (passport) => {
         function (accessToken, refreshToken, profile, done) {
             console.log('accessToken = ' + accessToken);
             console.log('profile = ' + JSON.stringify(profile));
-            process.nextTick(function () {
+            process.nextTick(function () { // Asygxrona
                 {
                     User.findOne({'facebook.id': profile.id}, function (err, user) {
                         if (err) {
@@ -34,9 +34,15 @@ module.exports = (passport) => {
                         let newUser = new User();
                         newUser.facebook.id = profile.id;
                         newUser.facebook.token = accessToken;
-                        newUser.facebook.name = profile.displayName;
                         newUser.facebook.email = profile.emails[0].value;
                         newUser.facebook.provider = profile.provider;
+                        if (!newUser.name) {
+                            /*
+                             * Psaxnoume gia facebook.id. Ean den yparxei facebook.id
+                             * alla yparxei name ston xristi na min apothikseusei to name
+                             */
+                            newUser.name = profile.displayName;
+                        }
                         newUser.save(function (err) {
                             if (err) {
                                 console.log('ERROR INSERT ' + err);

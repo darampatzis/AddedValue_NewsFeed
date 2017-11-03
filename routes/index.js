@@ -25,7 +25,7 @@ router.get('/', function (req, res) {
                 login: req.session.auth,
                 user: req.session.user
             });
-        });
+        })
     }
 });
 
