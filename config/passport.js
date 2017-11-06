@@ -13,7 +13,7 @@ module.exports = (passport) => {
         });
     });
 
-    passport.use(new FacebookStrategy({
+    passport.use('facebook', new FacebookStrategy({
             clientID: config.facebook.clientID,
             clientSecret: config.facebook.clientSecret,
             callbackURL: config.facebook.callbackURL,
