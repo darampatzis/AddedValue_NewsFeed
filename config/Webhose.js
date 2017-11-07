@@ -1,7 +1,8 @@
 const webhoseio = require('webhoseio');
+const config = require('./config');
 
 const client = webhoseio.config({
-    token: 'f79c825d-f09a-491c-ad7b-2df462930f0d'
+    token: config.webhoseToken.token
 });
 
 const makeQuery = function (keyword, type) {
