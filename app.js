@@ -9,6 +9,7 @@ const passport = require('passport');
 const session = require('express-session');
 
 const index = require('./routes/index');
+const user = require('./routes/user');
 //const login = require('./routes/login');
 
 const app = express();
@@ -39,6 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
+app.use('/user', user);
 //app.use('/login', login);
 
 require('./routes/login')(app, passport);
