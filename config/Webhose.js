@@ -8,7 +8,8 @@ const client = webhoseio.config({
 const makeQuery = function (keyword, type) {
     return {
         'q': ' "' + keyword + '" language:greek site_type:' + type + '',
-        'sort': 'crawled'
+        'sort': 'crawled',
+        'size': 10
     };
 };
 

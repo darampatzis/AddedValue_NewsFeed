@@ -85,3 +85,13 @@ article {
 article p {
     margin-bottom: .5em;
 }
+
+.btn-itLogin {
+    color: white;
+    background-color: #009688;
+}
+
+.btn-itLogin:hover {
+    color: white;
+    background-color: #00aa9a;
+}
