@@ -1,7 +1,7 @@
 module.exports = (router, passport) => {
-    router.get('/login/itlogin', passport.authenticate('itlogin', {scope: ['cn,mail,id']}));
+    router.get('/login/itlogin', passport.authenticate('itlogin', {scope: ['cn, mail, id']}));
     router.get('/login/login/callback', function (req, res, next) {
-        passport.authenticate('itlogin', function (err, user, info) {
+        passport.authenticate('itlogin', function (err, user) {
             if (err || !user) {
                 return res.redirect('/');
             }
@@ -15,9 +15,9 @@ module.exports = (router, passport) => {
     });
 
     // facebook
-    router.get('/login/facebook', passport.authenticate('facebook', {scope: ['id', 'email', 'displayName']}));
+    router.get('/login/facebook', passport.authenticate('facebook', {scope: ['email']}));
     router.get('/login/facebook/callback', function (req, res, next) {
-        passport.authenticate('facebook', function (err, user, info) {
+        passport.authenticate('facebook', function (err, user) {
             if (err || !user) {
                 return res.redirect('/');
             }

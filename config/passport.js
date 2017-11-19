@@ -31,8 +31,7 @@ module.exports = (passport) => {
                 let profile = JSON.parse(body);
                 console.log('profile = ' + profile);
                 console.log('cn = ' + profile.cn);
-
-                User.findOne({'it.itId': profile.id}, function (err, user) {
+                User.findOne({'accounts.it.id': profile.id}, function (err, user) {
                     if (err) {
                         return done(err);
                     }
@@ -40,11 +39,10 @@ module.exports = (passport) => {
                         return done(null, user);
                     }
                     let newUser = new User();
-                    newUser.it.itId = profile.id;
-                    newUser.it.token = accessToken;
-                    newUser.it.email = profile.mail;
+                    newUser.accounts.it.id = profile.id;
+                    newUser.accounts.it.token = accessToken;
+                    newUser.email = profile.mail;
                     newUser.name = profile.cn;
-
                     newUser.save(function (err) {
                         if (err) {
                             console.log('ERROR INSERT ' + err);
@@ -69,7 +67,7 @@ module.exports = (passport) => {
             console.log('profile = ' + JSON.stringify(profile));
             process.nextTick(function () { // Asygxrona
                 {
-                    User.findOne({'facebook.facebookId': profile.id}, function (err, user) {
+                    User.findOne({'accounts.facebook.id': profile.id}, function (err, user) {
                         if (err) {
                             return done(err);
                         }
@@ -77,16 +75,10 @@ module.exports = (passport) => {
                             return done(null, user);
                         }
                         let newUser = new User();
-                        newUser.facebook.facebookId = profile.id;
-                        newUser.facebook.token = accessToken;
-                        newUser.facebook.email = profile.emails[0].value;
-                        if (!newUser.name) {
-                            /*
-                             * Psaxnoume gia facebook.facebookId. Ean den yparxei facebook.facebookId
-                             * alla yparxei name ston xristi na min apothikseusei to name
-                             */
-                            newUser.name = profile.displayName;
-                        }
+                        newUser.accounts.facebook.id = profile.id;
+                        newUser.accounts.facebook.token = accessToken;
+                        newUser.email = profile.emails[0].value;
+                        newUser.name = profile.displayName;
                         newUser.save(function (err) {
                             if (err) {
                                 console.log('ERROR INSERT ' + err);
