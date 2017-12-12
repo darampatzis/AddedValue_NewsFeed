@@ -31,7 +31,7 @@ module.exports = (passport) => {
                 let profile = JSON.parse(body);
                 console.log('profile = ' + profile);
                 console.log('cn = ' + profile.cn);
-                User.findOne({'accounts.it.id': profile.id}, function (err, user) {
+                User.findOne({'it.id': profile.id}, function (err, user) {
                     if (err) {
                         return done(err);
                     }
@@ -39,10 +39,10 @@ module.exports = (passport) => {
                         return done(null, user);
                     }
                     let newUser = new User();
-                    newUser.accounts.it.id = profile.id;
-                    newUser.accounts.it.token = accessToken;
-                    newUser.email = profile.mail;
-                    newUser.name = profile.cn;
+                    newUser.it.id = profile.id;
+                    newUser.it.token = accessToken;
+                    newUser.it.email = profile.mail;
+                    newUser.it.name = profile.cn;
                     newUser.save(function (err) {
                         if (err) {
                             console.log('ERROR INSERT ' + err);
@@ -67,7 +67,7 @@ module.exports = (passport) => {
             console.log('profile = ' + JSON.stringify(profile));
             process.nextTick(function () { // Asygxrona
                 {
-                    User.findOne({'accounts.facebook.id': profile.id}, function (err, user) {
+                    User.findOne({'facebook.id': profile.id}, function (err, user) {
                         if (err) {
                             return done(err);
                         }
@@ -75,10 +75,10 @@ module.exports = (passport) => {
                             return done(null, user);
                         }
                         let newUser = new User();
-                        newUser.accounts.facebook.id = profile.id;
-                        newUser.accounts.facebook.token = accessToken;
-                        newUser.email = profile.emails[0].value;
-                        newUser.name = profile.displayName;
+                        newUser.facebook.id = profile.id;
+                        newUser.facebook.token = accessToken;
+                        newUser.facebook.email = profile.emails[0].value;
+                        newUser.facebook.name = profile.displayName;
                         newUser.save(function (err) {
                             if (err) {
                                 console.log('ERROR INSERT ' + err);

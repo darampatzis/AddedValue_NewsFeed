@@ -2,36 +2,26 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    name: String,
-    email: {
-        type: String,
-        unique: true
+    facebook: {
+        id: String,
+        token: String,
+        name: String,
+        email: String,
+        pref: [],
+        createdAt: {
+            type: Date,
+            default: Date.now()
+        }
     },
-    createdAt: {
-        type: Date,
-        default: Date.now()
-    },
-    pref: [],
-    accounts: {
-        facebook: {
-            id: {
-                type: String,
-                unique: true
-            },
-            token: {
-                type: String,
-                unique: true
-            },
-        },
-        it: {
-            id: {
-                type: String,
-                unique: true
-            },
-            token: {
-                type: String,
-                unique: true
-            }
+    it: {
+        id: String,
+        token: String,
+        name: String,
+        email: String,
+        pref: [],
+        createdAt: {
+            type: Date,
+            default: Date.now()
         }
     }
 });
