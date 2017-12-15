@@ -12,7 +12,7 @@ module.exports = {
         token: 'https://login.it.teithe.gr/token',
     },
     database: {
-        url: 'mongodb://localhost:27017/news'
+        url: 'mongodb://mongodb.teinews.svc:27017/news'
     },
     webhoseToken: {
         token: '68e6cd56-bbc0-4f64-8b69-0fdf619a6c99a'
