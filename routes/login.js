@@ -9,6 +9,7 @@ module.exports = (router, passport) => {
                 console.log(user);
                 req.session.auth = true;
                 req.session.user = user;
+                req.session.authProvider = 'it';
                 res.redirect('/')
             }
         })(req, res, next);
@@ -26,6 +27,7 @@ module.exports = (router, passport) => {
                 console.log(user);
                 req.session.auth = true;
                 req.session.user = user;
+                req.session.authProvider = 'facebook';
                 res.redirect('/')
             }
         })(req, res, next);

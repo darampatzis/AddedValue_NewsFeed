@@ -15,6 +15,7 @@ module.exports = {
         url: 'mongodb://localhost:27017/news'
     },
     webhoseToken: {
-        token: '68e6cd56-bbc0-4f64-8b69-0fdf619a6c99a'
+        token: '68e6cd56-bbc0-4f64-8b69-0fdf619a6c99'
+        // token: 'f79c825d-f09a-491c-ad7b-2df462930f0d' // 1000 requests left with this token
     }
 };

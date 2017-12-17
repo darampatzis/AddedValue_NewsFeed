@@ -7,7 +7,18 @@ const userSchema = new Schema({
         token: String,
         name: String,
         email: String,
-        pref: [],
+        pref: {
+            type: Array,
+            default: [
+                'Μηχανική Μάθηση',
+                'Προηγμένες Αρχιτεκτονικές Υπολογιστών και Παράλληλα Συστήματα',
+                'Δίκτυα Η/Υ',
+                'Ευφυή Συστήματα',
+                'Διαδικτυακές Υπηρεσίες Προστιθέμενης Αξίας',
+                'Διαδίκτυο των Πραγμάτων',
+                'Ασφάλεια Πληροφοριακών Συστημάτων'
+            ]
+        },
         createdAt: {
             type: Date,
             default: Date.now()
@@ -18,7 +29,18 @@ const userSchema = new Schema({
         token: String,
         name: String,
         email: String,
-        pref: [],
+        pref: {
+            type: Array,
+            default: [
+                'Γραφικά Υπολογιστών',
+                'Τεχνολογία Πολυμέσων',
+                'Δίκτυα Η/Υ',
+                'Ευφυή Συστήματα',
+                'Δίκτυα Ασύρματων και Κινητών Επικοινωνιών',
+                'Διαδίκτυο των Πραγμάτων',
+                'Ασφάλεια Πληροφοριακών Συστημάτων'
+            ]
+        },
         createdAt: {
             type: Date,
             default: Date.now()

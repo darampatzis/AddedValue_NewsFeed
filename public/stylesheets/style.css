@@ -95,3 +95,8 @@ article p {
     color: white;
     background-color: #00aa9a;
 }
+
+#loading {
+    display: none;
+    text-align: center;
+}

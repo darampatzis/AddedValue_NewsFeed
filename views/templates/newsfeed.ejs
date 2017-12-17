@@ -1,14 +1,10 @@
 <em class="text-center center-block">
-    <!-- kentrarismeno keimeno em -->
+    <!-- centralized text em -->
     Βρέθηκαν <%= output['totalResults'] %> αποτελέσματα
-    - Εμφανίζονται τα <%= output['totalResults'] - output['moreResultsAvailable'] %> απο αυτά
-    - <%= output['requestsLeft'] %> requests left (Debugging)
 </em>
 <% if (output['posts']) { %>
-<% output['posts'].forEach(function(item, index) { %>
-<!-- Me tin parametro "index" metraw ta arthra (gia debugging) -->
-<!--div class="col-md-10 blogShort">
-    <!-- Ola ta arthra emfanizontai pleon to ena katw apo to allo -->
+<% output['posts'].forEach(function(item) { %>
+<!-- All the posts are being shown vertically and centered -->
 <div class="container load-more">
     <div class="col-md-6 col-md-offset-6 blogShort">
         <a class="hover_style" href="<%- item.thread.url %>" target="_blank">
@@ -21,34 +17,28 @@
                 <img src="<%- item.thread.main_image %>" alt="post img"
                      class="img-responsive img-thumbnail"
                      onError="this.onerror=null;this.src='https://users.it.teithe.gr/~it144252/photo-not-available.png';">
-                <!-- onError diladi ean den vrethei eikona fortonetai eikona apo users.it -->
+                <!-- onError if photo does not exists, load error image from users.it -->
             </div>
         </a>
         <article class="article-body">
             <p class="read-more"><%= item.text %></p>
         </article>
         <em class="pull-left">
-            Article no <%= ++index %>
+            Πηγή:
             <a href="http://<%= item.thread.site_full %>" target="_blank">
                 <%= item.thread.site_full %>
             </a>
         </em>
         <em class="pull-right">
             <%= moment(item.thread.published).format('LLLL') %>
-            <!-- px Τρίτη, 17 Οκτωβρίου 2017 9:54 ΜΜ -->
+            <!-- etc. Τρίτη, 17 Οκτωβρίου 2017 9:54 ΜΜ -->
         </em>
     </div>
 </div>
 <% }); %>
+<p id="loading">
+    <img src="https://users.it.teithe.gr/~it144252/loading.gif" alt="Loading…"/>
+</p>
 <% } else { %>
 <h1>ERROR</h1>
 <% } %>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".read-more").shorten({
-            "showChars": 1100,
-            "moreText": "Περισσότερα",
-            "lessText": "Λιγότερα"
-        });
-    });
-</script>
