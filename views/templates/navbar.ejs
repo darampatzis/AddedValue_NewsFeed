@@ -49,6 +49,7 @@
                     </ul>
                 </li>
                 <% } else { %>
+                <li><a href="/logout">Logout</a></li>
                 <% if (user.facebook.token) { %>
                 <li><p class="navbar-text">Hello <%= user.facebook.name %></p></li>
                 <% } else { %>

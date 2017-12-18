@@ -3,6 +3,7 @@ module.exports = (router, passport) => {
     router.get('/login/login/callback', function (req, res, next) {
         passport.authenticate('itlogin', function (err, user) {
             if (err || !user) {
+                console.log(err)
                 return res.redirect('/');
             }
             else {

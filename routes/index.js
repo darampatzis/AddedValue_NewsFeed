@@ -40,7 +40,7 @@ router.get('/', function (req, res, next) {
         // else show random stuff
         webhoseio.client.query('filterWebContent', webhoseio.makeQuery('language:greek', 'news')).then(output => {
             console.log('GET / - fortosi selidas XWRIS paramertous');
-            console.log('passport user = = ' + JSON.stringify(req.user));
+            console.log('passport user = = ' + JSON.stringify(req.session.user));
             res.render('index', {
                 title: 'Express',
                 output: output,
@@ -81,4 +81,11 @@ router.post('/getNext', (req, res, next) => {
     });
 });
 
+
+router.get('/logout', (req, res, next) => {
+    // Get next batch of posts for pagination
+    req.session.destroy(function(err) {
+        res.redirect('/');
+    })
+});
 module.exports = router;
