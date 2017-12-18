@@ -13,7 +13,7 @@ const index = require('./routes/index');
 const app = express();
 
 require('./config/database');
-require('./config/passport')(passport);
+const mypass = require('./config/passport')(passport);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -39,7 +39,7 @@ app.use(passport.session());
 
 app.use('/', index);
 
-require('./routes/login')(app, passport);
+require('./routes/login')(app, mypass);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
