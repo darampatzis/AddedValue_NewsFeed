@@ -2,7 +2,7 @@ module.exports = {
     facebook: {
         clientID: '1863053447356182',
         clientSecret: '47feebff235bbf453b750080fe282e5a',
-        callbackURL: 'http://public.it.teithe.gr/login/facebook/callback'
+        callbackURL: 'https://public.it.teithe.gr/login/facebook/callback'
     },
     itlogin: {
         clientID: '5a08952459a9dc3d6c987443',
