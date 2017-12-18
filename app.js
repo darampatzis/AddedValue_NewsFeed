@@ -7,6 +7,20 @@ const expressSanitizer = require('express-sanitizer');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const session = require('express-session');
+const mongoose = require('mongoose');
+const MongoStore = require('connect-mongo')(session);
+
+const config = require('./config/config').database.url;
+mongoose.Promise = global.Promise;
+
+mongoose.connect(config, {
+    server: {
+        socketOptions: {
+            socketTimeoutMS: 120000, //120000 = 2minutes
+            connectionTimeout: 120000
+        }
+    }
+});
 
 const index = require('./routes/index');
 
@@ -30,13 +44,13 @@ app.use(expressSanitizer());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-    secret: 'keyboard cat',
+    secret: 'SDAsad7a844tcJm49glsdgak89treR5#Dsd',
     resave: false,
     saveUninitialized: true,
-    cookie: {
-        secure: true,
-        httpOnly: false,
-    }
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection,
+        ttl: 60 * 60 // = 1 hours.
+    })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
