@@ -46,7 +46,8 @@ router.get('/', function (req, res, next) {
                 title: 'Express',
                 output: output,
                 login: req.session.auth,
-                user: req.session.user
+                user: req.session.user,
+                query: "Greek news"
             });
         })
     }
