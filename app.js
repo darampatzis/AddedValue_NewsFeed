@@ -32,7 +32,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+        secure: true,
+        httpOnly: false,
+    }
 }));
 app.use(passport.initialize());
 app.use(passport.session());
