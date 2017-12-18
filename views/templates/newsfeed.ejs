@@ -1,6 +1,7 @@
 <em class="text-center center-block">
     <!-- centralized text em -->
-    Βρέθηκαν <%= output['totalResults'] %> αποτελέσματα
+    Βρέθηκαν <%= output['totalResults'] %> αποτελέσματα<br>
+    Query: <%=query%>
 </em>
 <% if (output['posts']) { %>
 <% output['posts'].forEach(function(item) { %>

@@ -32,7 +32,8 @@ router.get('/', function (req, res, next) {
                     output: output,
                     login: req.session.auth,
                     user: req.session.user,
-                    authProvider: req.session.authProvider
+                    authProvider: req.session.authProvider,
+                    query: query
                 });
             });
         });
@@ -65,7 +66,8 @@ router.get('/search', (req, res, next) => {
                 output: output,
                 login: req.session.auth,
                 user: req.session.user,
-                authProvider: req.session.authProvider
+                authProvider: req.session.authProvider,
+                query:query
             });
         })
     }
