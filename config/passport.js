@@ -1,11 +1,12 @@
-const config = require('./config')
+const config = require('./config');
 const OAuth2Strategy = require('passport-oauth2').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const User = require('../model/user');
 const request = require('request');
 
 module.exports = (passport) => {
     passport.serializeUser(function (user, done) {
-        done(null, user.facebook.id);
+        done(null, user.id);
     });
 
     passport.deserializeUser(function (id, done) {
@@ -14,6 +15,7 @@ module.exports = (passport) => {
         });
     });
 
+    // it login
     passport.use('itlogin', new OAuth2Strategy({
             authorizationURL: config.itlogin.authUrl,
             tokenURL: config.itlogin.token,
@@ -29,8 +31,7 @@ module.exports = (passport) => {
                 let profile = JSON.parse(body);
                 console.log('profile = ' + profile);
                 console.log('cn = ' + profile.cn);
-
-                User.findOne({'itId': profile.id}, function (err, user) {
+                User.findOne({'it.id': profile.id}, function (err, user) {
                     if (err) {
                         return done(err);
                     }
@@ -38,11 +39,10 @@ module.exports = (passport) => {
                         return done(null, user);
                     }
                     let newUser = new User();
-                    newUser.itId = profile.id;
-                    newUser.token = accessToken;
-                    newUser.email = profile.mail;
-                    newUser.name = profile.cn;
-
+                    newUser.it.id = profile.id;
+                    newUser.it.token = accessToken;
+                    newUser.it.email = profile.mail;
+                    newUser.it.name = profile.cn;
                     newUser.save(function (err) {
                         if (err) {
                             console.log('ERROR INSERT ' + err);
@@ -51,6 +51,43 @@ module.exports = (passport) => {
                         return done(null, newUser);
                     })
                 });
+            });
+        }
+    ));
+
+    // facebook login
+    passport.use('facebook', new FacebookStrategy({
+            clientID: config.facebook.clientID,
+            clientSecret: config.facebook.clientSecret,
+            callbackURL: config.facebook.callbackURL,
+            profileFields: ['id', 'email', 'displayName']
+        },
+        function (accessToken, refreshToken, profile, done) {
+            console.log('accessToken = ' + accessToken);
+            console.log('profile = ' + JSON.stringify(profile));
+            process.nextTick(function () { // Asygxrona
+                {
+                    User.findOne({'facebook.id': profile.id}, function (err, user) {
+                        if (err) {
+                            return done(err);
+                        }
+                        if (user) {
+                            return done(null, user);
+                        }
+                        let newUser = new User();
+                        newUser.facebook.id = profile.id;
+                        newUser.facebook.token = accessToken;
+                        newUser.facebook.email = profile.emails[0].value;
+                        newUser.facebook.name = profile.displayName;
+                        newUser.save(function (err) {
+                            if (err) {
+                                console.log('ERROR INSERT ' + err);
+                                throw err;
+                            }
+                            return done(null, newUser);
+                        })
+                    });
+                }
             });
         }
     ));

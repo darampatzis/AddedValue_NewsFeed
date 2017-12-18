@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
+//const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const expressSanitizer = require('express-sanitizer');
@@ -9,8 +9,6 @@ const passport = require('passport');
 const session = require('express-session');
 
 const index = require('./routes/index');
-const user = require('./routes/user');
-//const login = require('./routes/login');
 
 const app = express();
 
@@ -28,7 +26,7 @@ app.locals.moment.locale('el');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(expressSanitizer()); // Prostethike expressSanitizer
+app.use(expressSanitizer());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
@@ -40,8 +38,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', index);
-app.use('/user', user);
-//app.use('/login', login);
 
 require('./routes/login')(app, passport);
 
