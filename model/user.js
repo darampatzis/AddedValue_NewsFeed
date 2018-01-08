@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Αρχική Έκδοση: Στατικό πέρασμα για τις προτιμήσεις του χρήστη. Στο μέλλον θα παίρνουμε τις προτιμήσεις του
+// χρήστη και θα τις εισάγουμε δυναμικά.
 const userSchema = new Schema({
     facebook: {
         id: String,
