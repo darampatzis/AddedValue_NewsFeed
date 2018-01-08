@@ -5,11 +5,11 @@ const User = require('../model/user');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    // if parameter exists in index, redirect to route /search
+    // Εάν υπάρχει παράμετρος στο index, πήγαινε στο route /search
     if (Object.keys(req.query).length != 0) {
         res.redirect('/search?q=' + req.query.q);
     }
-    // if the user is logged in, show news according to its preferences
+    // Εάν ο χρήστης είναι συνδεδεμένος, εμφάνισε ειδήσεις σχετικές με τις προτιμήσεις του
     if (req.session.auth) {
         const authProvider = req.session.authProvider;
         const user = req.session.user;
@@ -38,7 +38,7 @@ router.get('/', function (req, res, next) {
             });
         });
     } else {
-        // else show random stuff
+        // αλλιώς εμφάνισε τυχαίο περιεχόμενο
         webhoseio.client.query('filterWebContent', webhoseio.makeQuery('language:greek', 'news')).then(output => {
             console.log('GET / - fortosi selidas XWRIS paramertous');
             console.log('passport user = = ' + JSON.stringify(req.session.user));
@@ -55,7 +55,7 @@ router.get('/', function (req, res, next) {
 
 router.get('/search', (req, res, next) => {
     const query = req.sanitize(req.query.q);
-    // User's input is being sanitized
+    // Η είσοδος του χρήστη γίνεται sanitize (Για λόγους ασφαλείας)
     console.log('GET /q=' + query + ' - fortosi selidas ME paramertous');
     if (!query) {
         console.log('ERROR RETURN');
