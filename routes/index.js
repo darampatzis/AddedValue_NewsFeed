@@ -21,6 +21,8 @@ router.get('/', function (req, res, next) {
                 rawQuery = user.it.pref;
             }
             let query = '';
+            // Για κάθε εγγραφή του πεδίου pref, θα προστίθεται μετά το κείμενο ένα OR
+            // και θα κάνει όλα αυτά που του αρέσουν αναζήτηση
             for (let i in rawQuery) {
                 query += '"' + rawQuery[i] + '" OR ';
             }
